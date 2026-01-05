@@ -114,11 +114,7 @@ App_list/
 4. **Loading Tracking** : The counter at the top displays the number of loaded users out of the total
 
 
-<<<<<<< HEAD
 ## Technical Optimizations
-=======
-##  Optimisations Techniques
->>>>>>> e5a821d85a5f7b5b98d10b00448063f27c052ef0
 
 ### Backend
 - **Streaming** : Uses Node.js streams to read files line by line without loading everything into memory
