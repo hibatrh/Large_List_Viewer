@@ -39,7 +39,7 @@ Cette application résout le problème classique d'affichage de grandes quantit�
 
 1. **Cloner le repository**
 ```bash
-git clone <votre-repo-url>
+git clone <repo-url>
 cd App_list
 ```
 
@@ -113,25 +113,6 @@ App_list/
 3. **Navigation par lettre** : Cliquez sur une lettre dans le menu A-Z pour naviguer rapidement vers cette section
 4. **Suivi du chargement** : Le compteur en haut affiche le nombre d'utilisateurs chargés sur le total
 
-##  API Endpoints
-
-### GET /api/users
-Récupère une page d'utilisateurs
-- Query params: `page` (numéro de page), `limit` (nombre d'éléments par page)
-- Retourne: Liste d'utilisateurs avec métadonnées (page, total, hasMore)
-
-### GET /api/users/index
-Récupère l'index alphabet (position de départ de chaque lettre)
-- Retourne: Objet avec les positions de départ pour A-Z
-
-### GET /api/users/count
-Récupère le nombre total d'utilisateurs
-- Retourne: Nombre total d'utilisateurs dans le fichier
-
-### GET /api/users/letter/:letter
-Récupère les utilisateurs commençant par une lettre spécifique
-- Param: `letter` (A-Z)
-- Query params: `limit` (nombre d'éléments)
 
 ##  Optimisations Techniques
 
