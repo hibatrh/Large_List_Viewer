@@ -1,168 +1,148 @@
 # Large List Viewer - Optimized for 10M+ Users
 
-Une application web performante pour afficher et naviguer dans de très grandes listes d'utilisateurs (jusqu'à 10 millions) sans geler le navigateur.
+A high-performance web application to display and navigate through very large user lists (up to 10 million) without freezing the browser.
 
 ![Application Screenshot](screenshot.png)
 
-## 🎯 Objectif
+## Objective
 
-Cette application résout le problème classique d'affichage de grandes quantités de données dans un navigateur web. Au lieu de charger tous les éléments d'un coup (ce qui provoquerait un gel du navigateur), l'application utilise des techniques de virtualisation et de chargement progressif pour garantir des performances optimales.
+This application solves the classic problem of displaying large amounts of data in a web browser. Instead of loading all items at once (which would freeze the browser), the application uses virtualization and progressive loading techniques to ensure optimal performance.
 
-##  Fonctionnalités
+## Features
 
-- **Virtual Scrolling** : Affichage uniquement des éléments visibles à l'écran pour optimiser les performances
-- **Chargement progressif** : Chargement des données par chunks au fur et à mesure du scroll
-- **Navigation par alphabet** : Menu A-Z pour naviguer rapidement vers une section spécifique
-- **Compteur en temps réel** : Affichage du nombre d'utilisateurs chargés / total
-- **Interface réactive** : Scroll fluide à 60 FPS même avec des millions d'éléments
+- **Virtual Scrolling** : Only displays visible elements on screen to optimize performance
+- **Progressive Loading** : Loads data in chunks as you scroll
+- **Alphabet Navigation** : A-Z menu to quickly navigate to a specific section
+- **Real-time Counter** : Displays the number of loaded users / total
+- **Responsive Interface** : Smooth scrolling at 60 FPS even with millions of elements
 
-##  Technologies Utilisées
+## Technologies Used
 
 ### Backend
-- **Node.js** avec Express.js
-- Lecture de fichiers via streams pour gérer efficacement les gros fichiers
-- API REST avec endpoints pour pagination et index alphabet
+- **Node.js** with Express.js
+- File reading via streams to efficiently handle large files
+- REST API with endpoints for pagination and alphabet index
 
 ### Frontend
-- **React** avec TypeScript
-- Virtualisation personnalisée (sans dépendances externes lourdes)
-- Axios pour les appels API
+- **React** with TypeScript
+- Custom virtualization (without heavy external dependencies)
+- Axios for API calls
 
-##  Installation
+## Installation
 
-### Prérequis
-- Node.js (v14 ou supérieur)
-- npm ou yarn
-- Un fichier `users.txt` contenant la liste des utilisateurs (un nom par ligne, trié par ordre alphabétique)
+### Prerequisites
+- Node.js (v14 or higher)
+- npm or yarn
+- A `users.txt` file containing the user list (one name per line, sorted alphabetically)
 
-### Étapes d'installation
+### Installation Steps
 
-1. **Cloner le repository**
+1. **Clone the repository**
 ```bash
-git clone <votre-repo-url>
+git clone <repo-url>
 cd App_list
 ```
 
-2. **Installer les dépendances du backend**
+2. **Install backend dependencies**
 ```bash
 cd backend
 npm install
 ```
 
-3. **Placer votre fichier users.txt**
-Placez votre fichier contenant les utilisateurs dans `backend/data/users.txt`
+3. **Place your users.txt file**
+Place your file containing users in `backend/data/users.txt`
 
-4. **Installer les dépendances du frontend**
+4. **Install frontend dependencies**
 ```bash
 cd ../frontend
 npm install
 ```
 
-##  Lancement
+## Launch
 
-### Démarrage du backend
+### Starting the backend
 
-Dans un terminal, depuis le dossier `backend` :
+In a terminal, from the `backend` folder:
 ```bash
 npm start
 ```
 
-Le serveur démarre sur `http://localhost:3001`
+The server starts on `http://localhost:3001`
 
-### Démarrage du frontend
+### Starting the frontend
 
-Dans un autre terminal, depuis le dossier `frontend` :
+In another terminal, from the `frontend` folder:
 ```bash
 npm start
 ```
 
-L'application s'ouvre automatiquement dans le navigateur sur `http://localhost:3000`
+The application opens automatically in the browser at `http://localhost:3000`
 
-##  Structure du Projet
+## Project Structure
 
 ```
 App_list/
 ├── backend/
 │   ├── data/
-│   │   └── users.txt          # Fichier contenant les utilisateurs
+│   │   └── users.txt          # File containing users
 │   ├── routes/
-│   │   └── users.js           # Routes API pour les utilisateurs
+│   │   └── users.js           # API routes for users
 │   ├── utils/
-│   │   ├── fileReader.js      # Utilitaires de lecture de fichier
-│   │   └── alphabetIndex.js   # Génération de l'index alphabet
-│   ├── server.js              # Point d'entrée du serveur
+│   │   ├── fileReader.js      # File reading utilities
+│   │   └── alphabetIndex.js   # Alphabet index generation
+│   ├── server.js              # Server entry point
 │   └── package.json
 ├── frontend/
 │   ├── src/
 │   │   ├── components/
-│   │   │   ├── VirtualList.tsx    # Composant de liste virtualisée
-│   │   │   └── AlphabetMenu.tsx   # Menu de navigation A-Z
+│   │   │   ├── VirtualList.tsx    # Virtualized list component
+│   │   │   └── AlphabetMenu.tsx   # A-Z navigation menu
 │   │   ├── hooks/
-│   │   │   └── useInfiniteScroll.ts  # Hook pour le scroll infini
+│   │   │   └── useInfiniteScroll.ts  # Infinite scroll hook
 │   │   ├── services/
-│   │   │   └── api.ts          # Appels API
+│   │   │   └── api.ts          # API calls
 │   │   └── App.tsx
 │   └── package.json
 └── README.md
 ```
 
-##  Utilisation
+## Usage
 
-1. **Affichage initial** : La première page d'utilisateurs se charge automatiquement
-2. **Scroll infini** : Scrollez vers le bas pour charger automatiquement plus d'utilisateurs
-3. **Navigation par lettre** : Cliquez sur une lettre dans le menu A-Z pour naviguer rapidement vers cette section
-4. **Suivi du chargement** : Le compteur en haut affiche le nombre d'utilisateurs chargés sur le total
+1. **Initial Display** : The first page of users loads automatically
+2. **Infinite Scroll** : Scroll down to automatically load more users
+3. **Letter Navigation** : Click on a letter in the A-Z menu to quickly navigate to that section
+4. **Loading Tracking** : The counter at the top displays the number of loaded users out of the total
 
-##  API Endpoints
 
-### GET /api/users
-Récupère une page d'utilisateurs
-- Query params: `page` (numéro de page), `limit` (nombre d'éléments par page)
-- Retourne: Liste d'utilisateurs avec métadonnées (page, total, hasMore)
-
-### GET /api/users/index
-Récupère l'index alphabet (position de départ de chaque lettre)
-- Retourne: Objet avec les positions de départ pour A-Z
-
-### GET /api/users/count
-Récupère le nombre total d'utilisateurs
-- Retourne: Nombre total d'utilisateurs dans le fichier
-
-### GET /api/users/letter/:letter
-Récupère les utilisateurs commençant par une lettre spécifique
-- Param: `letter` (A-Z)
-- Query params: `limit` (nombre d'éléments)
-
-##  Optimisations Techniques
+## Technical Optimizations
 
 ### Backend
-- **Streaming** : Utilisation de streams Node.js pour lire les fichiers ligne par ligne sans charger tout en mémoire
-- **Cache** : Cache de l'index alphabet et du total pour éviter de relire le fichier à chaque requête
-- **Pagination efficace** : Calcul précis de l'offset pour accéder directement à la bonne position dans le fichier
+- **Streaming** : Uses Node.js streams to read files line by line without loading everything into memory
+- **Cache** : Caches the alphabet index and total count to avoid re-reading the file on every request
+- **Efficient Pagination** : Precise offset calculation to directly access the correct position in the file
 
 ### Frontend
-- **Virtualisation** : Seuls les éléments visibles (et quelques éléments supplémentaires pour le buffer) sont rendus dans le DOM
-- **Accumulation intelligente** : Les données chargées sont accumulées et triées pour maintenir l'ordre
-- **Chargement par zones** : Lors de la navigation par alphabet, plusieurs pages sont chargées autour de la position ciblée pour une meilleure expérience
-- **Gestion mémoire** : Évite de garder des doublons en mémoire grâce à un système de tracking des pages chargées
+- **Virtualization** : Only visible elements (plus a few additional elements for buffer) are rendered in the DOM
+- **Smart Accumulation** : Loaded data is accumulated and sorted to maintain order
+- **Zone-based Loading** : When navigating by alphabet, multiple pages are loaded around the target position for a better experience
+- **Memory Management** : Avoids keeping duplicates in memory through a loaded pages tracking system
 
-##  Problèmes Connus / Limitations
+## Known Issues / Limitations
 
-- Le fichier users.txt doit être trié par ordre alphabétique pour que la navigation par alphabet fonctionne correctement
-- Pour des fichiers extrêmement volumineux (>10M lignes), la première génération de l'index alphabet peut prendre quelques secondes
+- The users.txt file must be sorted alphabetically for alphabet navigation to work correctly
+- For extremely large files (>10M lines), the first alphabet index generation may take a few seconds
 
-##  Améliorations Futures Possibles
+## Possible Future Improvements
 
-- Recherche par nom en temps réel
-- Filtres avancés
-- Export des résultats
-- Tri personnalisé
-- Pagination par curseur au lieu de pagination par offset
+- Real-time name search
+- Advanced filters
+- Results export
+- Custom sorting
+- Cursor-based pagination instead of offset pagination
 
 
-##  License
+## License
 
-Ce projet est un exemple de démonstration.
+This project is licensed under the MIT License.
 
 ---
-
